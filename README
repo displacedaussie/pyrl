@@ -1,5 +1,5 @@
 pyrl is a very simple IRC bot that acts as a gateway to twitter.
 
-It relies on py-scheduler (provided) and python-twitter (http://code.google.com/p/python-twitter/)
+It relies on py-scheduler (provided) and python-twitter: http://code.google.com/p/python-twitter/
 
-The bot doesn't handle IRC very well. It will not recover from a kick or a disconnect. Support to handle these kind of situations is on the TODO list.
+The bot doesn't (yet) handle IRC very well. It will not recover from a kick or a disconnect. More robust IRC support is on the TODO list.
