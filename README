@@ -4,8 +4,6 @@ It relies on py-scheduler (provided) and python-twitter: http://code.google.com/
 
 The bot doesn't (yet) handle IRC very well. It will not recover from a kick or a disconnect. More robust IRC support is on the TODO list.
 
-Pathetic bit: Before you first run the bot, create two files in the same directory named lasttweet.db and lastdm.db and put a small number (for example, 1, on the first line). This will be fixed SOON.
-
 pyrl provides the following commands:
 
     To find out information about a user:
