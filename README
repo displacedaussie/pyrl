@@ -3,3 +3,35 @@ pyrl is a very simple IRC bot that acts as a gateway to twitter.
 It relies on py-scheduler (provided) and python-twitter: http://code.google.com/p/python-twitter/
 
 The bot doesn't (yet) handle IRC very well. It will not recover from a kick or a disconnect. More robust IRC support is on the TODO list.
+
+Pathetic bit: Before you first run the bot, create two files in the same directory named lasttweet.db and lastdm.db and put a small number (for example, 1, on the first line). This will be fixed SOON.
+
+pyrl provides the following commands:
+
+    To find out information about a user:
+    !who <name>
+
+    To get the last x tweets from a user:
+    !fetch <name> [x]
+    
+    To begin following someone:
+    !follow <name>
+
+    To stop following someone:
+    !unfollow <name>
+
+    To list all users that you are following:
+    !following
+
+    To list all users that are following you:
+    !followers
+
+    To post to twitter:
+    !tweet <msg>
+
+    To send a direct message:
+    !dm <friend> <msg>
+
+The twitter timeline of those being followed will be checked periodically and updates will be sent to the channel.
+
+Direct messages will also be checked and sent to the channel.

@@ -228,7 +228,7 @@ To post to twitter:
 To send a direct message:
     !dm <friend> <msg>
 The twitter timeline of those being followed will be checked periodically and updates will be sent to the channel.
-Direct messages will also be checked and send to the channel."""
+Direct messages will also be checked and sent to the channel."""
 	for h in help_msg.split('\n'):
 		sendToChannel(user, h)
 	
