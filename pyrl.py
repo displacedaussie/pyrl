@@ -34,12 +34,12 @@ def IRCdisconnect():
 	s.close()
 
 def getApi():
-    """Create a twitter API instance when required"""
+	"""Create a twitter API instance when required"""
 	api = twitter.Api(username=config.username, password=config.password)
 	return api
   
 def postToTwitter(channel, user, tweet):
-    """Post an update to twitter and return a URL to the update"""
+	"""Post an update to twitter and return a URL to the update"""
 	api = getApi()
 	string = tweet + ' [' + user + ']'
 	try:
@@ -55,7 +55,7 @@ def postToTwitter(channel, user, tweet):
 		sendToChannel(channel, "Error posting to twitter. Either twitter is down, there's an API problem, or that was a REALLY lame tweet.")
 
 def postDirectMessage(channel, user, friend, tweet):
-    """Post a Direct Message to a user"""
+	"""Post a Direct Message to a user"""
 	api = getApi()
 	string = tweet + ' [' + user + ']'
 	try:
@@ -72,7 +72,7 @@ def postDirectMessage(channel, user, friend, tweet):
 
 
 def parseUser(string):
-    """Parse the user from the full user hostmask string"""
+	"""Parse the user from the full user hostmask string"""
 	try:
 		user = re.compile(':(.*)!').search(string).group()
 		return user[1:len(user)-1]
@@ -80,7 +80,7 @@ def parseUser(string):
 		return False
 	
 def getFollowing(channel):
-    """Get a list of twitter users that are being followed"""
+	"""Get a list of twitter users that are being followed"""
 	print "GetFollowing"
 	api = getApi()
 	try:
@@ -91,7 +91,7 @@ def getFollowing(channel):
 		sendToChannel(channel, "Hurr")
 	
 def getFollowers(channel):
-    """Get a list of twitter users that are following"""
+	"""Get a list of twitter users that are following"""
 	api = getApi()
 	try:
 		users = api.GetFollowers()
@@ -101,7 +101,7 @@ def getFollowers(channel):
 		sendToChannel(channel, "Hurr")
 
 def addFriend(channel, user):
-    """Add the user as a friend"""
+	"""Add the user as a friend"""
 	api = getApi()
 	try:
 		friend = api.CreateFriendship(user)
@@ -110,7 +110,7 @@ def addFriend(channel, user):
 		sendToChannel(channel, "Invalid user")
 	
 def removeFriend(channel, user):
-    """Remove a user from your friends list"""
+	"""Remove a user from your friends list"""
 	api = getApi()
 	try:
 		friend = api.DestroyFriendship(user)
@@ -120,33 +120,33 @@ def removeFriend(channel, user):
 
 # XXX: This is pretty lame. The timestamp of the last tweet is saved to a text file
 def getLastTweet():
-    """Get the time of the last tweet"""
+	"""Get the time of the last tweet"""
 	f = open('lasttweet.db', 'r')
 	created_at = float(f.read())
 	f.close()
 	return created_at
 	
 def setLastTweet(created_at):
-    """Set the time of the last tweet"""
+	"""Set the time of the last tweet"""
 	f = open('lasttweet.db', 'w')
 	f.write(str(created_at))
 	f.close()
 	
 def getLastDM():
-    """Get the time of the last direct message"""
+	"""Get the time of the last direct message"""
 	f = open('lastdm.db', 'r')
 	created_at = float(f.read())
 	f.close()
 	return created_at
 
 def setLastDM(created_at):
-    """Set the time of the last direct message"""
+	"""Set the time of the last direct message"""
 	f = open('lastdm.db', 'w')
 	f.write(str(created_at))
 	f.close()
 
 def getTweets():
-    """Get your user timeline and show any new tweets"""
+	"""Get your user timeline and show any new tweets"""
 	print "getTweets()"
 	api = getApi()
 	channel = config.channel
@@ -166,7 +166,7 @@ def getTweets():
 		#sendToChannel(channel, "Problem getting tweets. It was probably twitter's fault.")
 
 def getDirectMessages():
-    """Get your direct messages and show any that are new"""
+	"""Get your direct messages and show any that are new"""
 	print "getDirectMessages()"
 	api = getApi()
 	channel = config.channel
@@ -183,7 +183,7 @@ def getDirectMessages():
 		#sendToChannel(channel, "Problem getting direct messages. It was probably twitter's fault.")
 
 def getUser(channel, u):
-    """Get information about a user"""
+	"""Get information about a user"""
 	api = getApi()
 	try:
 		user = api.GetUser(u)
@@ -195,7 +195,7 @@ def getUser(channel, u):
 		
 
 def fetchTweets(channel, user, numTweets):
-    """Fetch the most recent X tweets for the specified user"""
+	"""Fetch the most recent X tweets for the specified user"""
 	api = getApi()
 	try:
 		if numTweets > 20:
@@ -212,21 +212,21 @@ def fetchTweets(channel, user, numTweets):
 def getHelp(channel, user):
 	help_msg = """pyrl provides the following commands:
 To find out information about a user:
-    !who <name>
+	!who <name>
 To get the last x tweets from a user:
-    !fetch <name> [x]
+	!fetch <name> [x]
 To begin following someone:
-    !follow <name>
+	!follow <name>
 To stop following someone:
-    !unfollow <name>
+	!unfollow <name>
 To list all users that are being followed:
-    !following
+	!following
 To list all users that are following:
-    !followers
+	!followers
 To post to twitter:
-    !tweet <msg>
+	!tweet <msg>
 To send a direct message:
-    !dm <friend> <msg>
+	!dm <friend> <msg>
 The twitter timeline of those being followed will be checked periodically and updates will be sent to the channel.
 Direct messages will also be checked and sent to the channel."""
 	for h in help_msg.split('\n'):
@@ -234,7 +234,7 @@ Direct messages will also be checked and sent to the channel."""
 	
 	
 def sendToChannel(channel, msg):
-    """Send the message to the channel"""
+	"""Send the message to the channel"""
 	s.send('PRIVMSG %s :%s\r\n' % (channel, msg))
 
 
@@ -280,9 +280,9 @@ while (alive):
 		
 		
 		if (len(line) >= 4 and parseUser(line[0]) not in config.blacklist):
-            
-            # Pick out the channel the message came from 
-            # (so that multiple channels and Private Messages are supported)
+			
+			# Pick out the channel the message came from 
+			# (so that multiple channels and Private Messages are supported)
 			if line[2] == config.nick:
 				channel = parseUser(line[0])
 			else:
@@ -319,8 +319,8 @@ while (alive):
 			# Start following/add friend
 			if (line[3] == ':!follow' and len(line) > 4):
 				addFriend(channel, line[4])
-            
-            # Stop following/remove friend
+			
+			# Stop following/remove friend
 			if (line[3] == ':!unfollow' and len(line) > 4):
 				removeFriend(channel, line[4])
 			
